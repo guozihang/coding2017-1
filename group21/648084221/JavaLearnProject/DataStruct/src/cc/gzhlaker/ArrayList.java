@@ -1,116 +1,148 @@
 package cc.gzhlaker;
 
-public class ArrayList implements List{
-	//------------------------------
-	//-
-	//------------------------------
-	public int size;
-	MyData[] now;
-	//------------------------------
-	//-
-	//------------------------------
-	public ArrayList(){
+public class ArrayList<T> implements List<T> {
+	// ------------------------------
+	// -私有成员变量
+	// ------------------------------
+	private int size;
+	private Object[] array;
+
+	// ------------------------------
+	// -构造函数
+	// -默认构造函数会初始化数组为100
+	// -有参数的构造函数会有一个参数，用来初始化数组的长度
+	// ------------------------------
+	public ArrayList() {
 		size = 0;
-		now = new MyData[100];
+		array = new Object[100];
 	}
-	public ArrayList(int length){
+
+	public ArrayList(int length) {
 		size = 0;
-		now = new MyData[length];
+		array = new Object[length];
 	}
-	//------------------------------
-	//-
-	//------------------------------
-	public boolean isFill(int size,int length){
-		if(size>length){
+
+	// ------------------------------
+	// -length从0开始，所以需要和size比较时加1
+	// -size不用加1，检测当前值如果与length相等则空间必定不够
+	// ------------------------------
+	public boolean isFill(int size, int length) {
+		if (size >= length + 1) {
 			return true;
-		}else if(size<=length){
+		} else if (size < length + 1) {
 			return false;
 		}
 		return false;
 	}
-	//------------------------------
-	//-
-	//------------------------------
-	public MyData[] increaseLength(MyData[] now){
-		MyData[] newarray = new MyData[now.length+10];
-		System.arraycopy(now, 0, newarray, 0, now.length);
+
+	// ------------------------------
+	// -每次扩大10的空间
+	// ------------------------------
+	public Object[] increaseLength(Object[] array) {
+		Object[] newarray = new Object[array.length + 10];
+		System.arraycopy(array, 0, newarray, 0, array.length);
 		return newarray;
 	}
 	
-	@Override
-	public void add(int data) {
-		if(isFill(size+1,now.length)){
-			now = increaseLength(now);
-		}
-		now[size].number = data;
-		size ++;
-	}
-	
-	@Override
-	public void add(int data, int index) {
-		if(isFill(size+1,now.length)){
-			now = increaseLength(now);
-		}
-		for(int i=size+1;i>index;i--){
-			now[i].number = now[i-1].number; 
-		}
-		now[index].number = data;
-		size++;
-		
+	public void find(int index){
 		
 	}
 	
+	public void find(Object object){
+		
+	}
+
 	@Override
-	public void addFirst(int data) {
-		if(isFill(size+1,now.length)){
-			now = increaseLength(now);
+	// ------------------------------
+	// -先检测空间是否够
+	//
+	//
+	public void add(T data) {
+		if (isFill(size + 1, array.length)) {
+			array = increaseLength(array);
 		}
-		for(int i=size+1;i>0;i--){
-			now[i].number = now[i-1].number;
-		}
-		now[0].number = data;
+		array[size] = data;
 		size++;
 	}
-	
+
+	@Override
+	// -
+	public void add(T data, int index) {
+		if (isFill(size, array.length)) {
+			array = increaseLength(array);
+		}
+		for (int i = size + 1; i > index; i--) {
+			array[i] = array[i - 1];
+		}
+		array[index] = data;
+		size++;
+	}
+
+	@Override
+	public void addFirst(T data) {
+		if (isFill(size, array.length)) {
+			array = increaseLength(array);
+		}
+		for (int i = size + 1; i > 0; i--) {
+			array[i] = array[i - 1];
+		}
+		array[0] = data;
+		size++;
+	}
+
 	@Override
 	public void remove(int index) {
-		now[size].number = 0;
-		size--;
-	}
-	
-	@Override
-	public void removeFirst() {
-		now[0].number = 0;
-		for(int i=0;i<=size;i++){
-			now[i].number = now[i+1].number;
+		for (int i = index; i <= index; i++) {
+			array[i] = array[i + 1];
 		}
 		size--;
 	}
-	
+
 	@Override
-	public void removeEnd(){
-		
+	public void removeFirst() {
+
+		for (int i = 1; i < size - 1; i++) {
+			array[i - 1] = array[i];
+		}
 	}
-	
+
 	@Override
-	public void setData(int data,int index) {
-		if(index>now.length){
+	public void removeEnd() {
+
+	}
+
+	@Override
+	public void setData(int data, int index) {
+		if (index > now.length) {
 			return;
 		}
 		now[index].number = data;
+
+	}
+
+	@Override
+	public void setData(T data, int index) {
+		// TODO Auto-generated method stub
 		
 	}
-	
+
 	@Override
-	public int getData(int index) {
-		if(index>now.length){
-			return -1;
-		}
-		int i = now[index].number;
-		return i;
+	public int size() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
+	@Override
+	public T getData(int index) {
+		
 
-	
+		return null;
+	}
+
+	@Override
+	public T getMember(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

@@ -2,7 +2,7 @@ package cc.gzhlaker;
 
 public class LinkList implements List {
 	//------------------------------
-	//-
+	//-linklist的基本思想
 	//------------------------------
 	//-
 	//------------------------------	

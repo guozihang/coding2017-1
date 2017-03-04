@@ -13,12 +13,4 @@ public class Main {
 	
 }
 
-class MyData{
-	
-	int number;
-	
-	public MyData(){
-		number = 0;
-	}
-}
 
